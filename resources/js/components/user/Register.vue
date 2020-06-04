@@ -49,14 +49,17 @@
         },
         methods : {
             handlePassword: function () {
-                let regexCheckPass = new RegExp('^[a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)]{8,16}?$', 'gm');
-                let result = regexCheckPass.test(this.password);
-                console.log(result)
-                this.passVerify = result;
-                if (!result) {
+                let regexCheckPass = '^[a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)]{8,16}?$';
+                this.passVerify = this.validation(this.password, regexCheckPass);
+                if (!this.passVerify) {
                     this.notifyCheckPass = this.errorPass;
                 }
                 //console.log(this.passVerify)
+            },
+
+            validation: function(field, pattern) {
+                let regexCheck = new RegExp(pattern, 'gm');
+                return regexCheck.test(field);
             },
 
             handleRegister: function () {
